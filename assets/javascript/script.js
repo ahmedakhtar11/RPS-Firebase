@@ -47,7 +47,6 @@
   var timedelay2;
   var resetgame = false;
 
-
 $(document).ready(function(){
 
 	//Checking the Score
@@ -79,16 +78,15 @@ $(document).ready(function(){
 				database.ref("players/1").update({		
 						win: player1wins,
 						lose: player1losses,	
-				});//database update
+				});
 				database.ref("players/2").update({
 						win: player2wins,
 						lose: player2losses,
-				});//database update
+				});
 			},
 	
 			playerscore : function (){
 			
-
 				if(player1choice == "rock" && player2choice == "scissors") {	
 					player1wins++;
 					player2losses++;
@@ -136,17 +134,15 @@ $(document).ready(function(){
 				}
 
 			}
-	}
+		}
 
-	
-
-	$("#welcomemessage").html("<h2>Enter Your Name to Play</h2>"
-						+"</br><input type='text' id='name-input'>" +
-						"</br></br><input type='submit' id='submit-name'>");
+	$("#welcomemessage").html("<h2>Enter Your Name to Start</h2>"
+	+"</br><input type='text' id='name-input'>" +
+	"</br></br><input type='submit' id='submit-name'>");
 	$("#waiting1").html("Waiting for player 1");
 	$("#waiting2").html("Waiting for player 2");
 	
-	//Hiding Choices and Messages foor New Game
+
 	function hidden() {
 			$("#player1choices").attr("style", "visibility:hidden");
 			$("#player2choices").attr("style", "visibility:hidden");
@@ -154,31 +150,23 @@ $(document).ready(function(){
 			$("#group1message").attr("style", "visibility:hidden");
 	}
 	hidden();
-
 	database.ref().on("value", function(snapshot){
-
 		function playerDisconnect(){
 			if(player != ""){
-				
-				//if this is Player 1's browser
+		
 				if ((snapshot.child("players").child(1).exists()) && (player == snapshot.child("players").child(1).val().name)){					
-						//update the message to the database
+					
 						database.ref("/chat").onDisconnect().update({							
 							message: ((snapshot.child("players").child(1).val().name) + " has been DISCONNECTED!!"),
 							dateAdded: firebase.database.ServerValue.TIMESTAMP												
 						});
-						//delete the player 1 database
 						database.ref("players/1").onDisconnect().remove();
-				//if this is Player 2's browser
 				}else if ((snapshot.child("players").child(2).exists()) && (player == snapshot.child("players").child(2).val().name)){	
-						//update the message to the database	
 						database.ref("/chat").onDisconnect().update({						
 							message: ((snapshot.child("players").child(2).val().name) + " has been DISCONNECTED!!"),
 							dateAdded: firebase.database.ServerValue.TIMESTAMP													
-						});//database	
-						//delete the player 1 database
+						});
 						database.ref("players/2").onDisconnect().remove();
-						//delete the turn database				
 						database.ref("/turn").onDisconnect().remove();	
 				}
 			}
@@ -293,46 +281,37 @@ $(document).ready(function(){
 		
 				if(databaseTurn == 3 && resetgame == false){
 						resetgame = true;
-					
 						player1choice = snapshot.child("players").child(1).val().choice;
 						player2choice = snapshot.child("players").child(2).val().choice;
 						player1wins = snapshot.child("players").child(1).val().win;
 						player1losses = snapshot.child("players").child(1).val().lose;
 						player2wins = snapshot.child("players").child(2).val().win;
 						player2losses = snapshot.child("players").child(2).val().lose;
-							
 							$("#player-1").attr("style", "border: 5px solid white");
 							$("#player-2").attr("style", "border: 5px solid white");
 							$("#player2choices").attr("style", "visibility:hidden");
 							$("#player1choices").attr("style", "visibility:hidden");
 							$("#group2message").attr("style", "visibility:visible");
 							$("#group1message").attr("style", "visibility:visible");		
-						 		$("#group1message").html("Chose: " + "<h2>" + player1choice + "</h2>");
-						 		$("#group2message").html("Chose: " + "<h2>" + player2choice + "</h2>");
+						 	$("#group1message").html("Chose: " + "<h2>" + player1choice + "</h2>");
+						 	$("#group2message").html("Chose: " + "<h2>" + player2choice + "</h2>");
 							$("#turnplayer").empty();	
-		
 						derivewinner.playerscore();
-			
 						timedelay = setTimeout(derivewinner.clearDelay, 5 * 1000);				
 				}	
 		}
 	}); 
 
-	$("#submit-name").on("click", function(){
-		
+	$("#submit-name").on("click", function(){	
 		var username = $("#name-input").val().trim();
-	
 		player = username;
-
 		    database.ref().once('value').then(function(snapshot) {
-	 				
 	 				if((snapshot.child("players").child(1).exists()) === false){
 							database.ref("players/1").set({
 									name : username,
 									win: player1wins,
 									lose: player1losses
 							}); 
-					
 					}else if((snapshot.child("players").child(1).exists()) && ((snapshot.child("players").child(2).exists()) === false)){
 							database.ref("players/2").set({
 								name : username,
@@ -342,29 +321,22 @@ $(document).ready(function(){
 							database.ref().update({
 								turn: turns,
 						});
-					
 					}else if ((snapshot.child("players").child(1).exists()) && (snapshot.child("players").child(2).exists())){
-					alert("There are two players playing! Try again later!");
+					alert("There is a game in progress. Please Try again.");
 					}
 			}); 
 	}); 
 
-	
 	$(".choice1").on("click", function(){
 	
 			player1choice = $(this).val();
-
 				database.ref().once('value').then(function(snapshot) {
-		 		
 		 			turns = (snapshot.child("turn").exists() ? snapshot.child("turn").val() : turns);
 					turns++; 
-
-				
 			 		if((player == snapshot.child("players").child(1).val().name)){
 						database.ref("players/1").update({		
 							choice : player1choice,						
 						});
-						
 						database.ref().update({		
 							turn: turns		
 						});
@@ -375,18 +347,13 @@ $(document).ready(function(){
 	$(".choice2").on("click", function(){
 
 			player2choice = $(this).val();
-
 				database.ref().once('value').then(function(snapshot) {
-		 		
 		 			turns = (snapshot.child("turn").exists() ? snapshot.child("turn").val() : turns);
 					turns++; //3
-					
-			
 			 		if((player == snapshot.child("players").child(2).val().name)){
 						database.ref("players/2").update({									
 							choice : player2choice,														
 						});
-						
 						database.ref().update({
 							turn: turns,									
 						});
@@ -394,18 +361,11 @@ $(document).ready(function(){
 				});
 			}); 
  	
-
  				$("#submit-chat").on("click", function(event){
-
  				event.preventDefault();
-
 				var messages = $("#chat-input").val().trim();
 				$("#chat-input").val("");
-			
-	
 				alertwindow = player + " : " + messages;
-					
-			
 				database.ref("/chat").update({		
 				message: alertwindow,
 				dateAdded: firebase.database.ServerValue.TIMESTAMP								
