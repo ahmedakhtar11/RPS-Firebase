@@ -1,3 +1,29 @@
+ 
+
+	  	// Audio for Theme Song
+      var audioElement = document.createElement("audio");
+      audioElement.setAttribute("src", "assets/avemaria.mp3");
+
+      	// Sound Effects for Crystal Buttons
+      var audioElement2 = document.createElement("audio");
+      audioElement2.setAttribute("src", "assets/lasersoundeffect.mp3");
+
+      // Theme Music Play Button
+      $(".theme-button").on("click", function() {
+        audioElement.play();
+      });
+
+      // Theme Music Pause Button
+      $(".pause-button").on("click", function() {
+        audioElement.pause();
+      });
+
+          // Crystal Buttons Sound Effect
+      $("#buttonscrystals").on("click", function() {
+        audioElement2.play();
+      });
+
+
  // Initialize Google Firebase
   var config = {
     apiKey: "AIzaSyByyBYc7GoEkCfDMgbJJpFyFykBl1jjrzs",
@@ -157,13 +183,13 @@ $(document).ready(function(){
 				if ((snapshot.child("players").child(1).exists()) && (player == snapshot.child("players").child(1).val().name)){					
 					
 						database.ref("/chat").onDisconnect().update({							
-							message: ((snapshot.child("players").child(1).val().name) + " has been DISCONNECTED!!"),
+							message: ((snapshot.child("players").child(1).val().name) + " Has Been Disconnected!"),
 							dateAdded: firebase.database.ServerValue.TIMESTAMP												
 						});
 						database.ref("players/1").onDisconnect().remove();
 				}else if ((snapshot.child("players").child(2).exists()) && (player == snapshot.child("players").child(2).val().name)){	
 						database.ref("/chat").onDisconnect().update({						
-							message: ((snapshot.child("players").child(2).val().name) + " has been DISCONNECTED!!"),
+							message: ((snapshot.child("players").child(2).val().name) + " Has Been Disconnected!"),
 							dateAdded: firebase.database.ServerValue.TIMESTAMP													
 						});
 						database.ref("players/2").onDisconnect().remove();
@@ -179,8 +205,8 @@ $(document).ready(function(){
 				$("#player1lossescount").empty();
 				$("#player1-name").empty();
 				$("#turnplayer").empty();
-				$("#player-1").attr("style", "border: 5px solid black");
-				$("#player-2").attr("style", "border: 5px solid black");
+				$("#playerone").attr("style", "border: 2px solid black");
+				$("#playertwo").attr("style", "border: 2px solid black");
 
 		};
 
@@ -191,15 +217,15 @@ $(document).ready(function(){
 				$("#player2lossescount").empty();
 				$("#player2-name").empty();
 				$("#turnplayer").empty();
-				$("#player-1").attr("style", "border: 5px solid black");
-				$("#player-2").attr("style", "border: 5px solid black");
+				$("#playerone").attr("style", "border: 2px solid black");
+				$("#playertwo").attr("style", "border: 2px solid black");
 		};
 
 		if((snapshot.child("players").child(2).exists()) && ((snapshot.child("players").child(1).exists()) === false)){
 				$("#player2-name").html(snapshot.child("players").child(2).val().name);
 				$("#waiting2").empty();
-				$("#player-1").attr("style", "border: 5px solid black");
-				$("#player-2").attr("style", "border: 5px solid black");
+				$("#playerone").attr("style", "border: 2px solid black");
+				$("#playertwo").attr("style", "border: 2px solid black");
 				hidden();
 	
 				playerDisconnect();
@@ -238,8 +264,8 @@ $(document).ready(function(){
 		
 				if((player == snapshot.child("players").child(1).val().name) && (databaseTurn == 1)){
 						$("#welcomemessage").html("<h2>Hello " + snapshot.child("players").child(1).val().name +  ".  You are player 1!</h2>");
-						$("#player-1").attr("style", "border: 5px solid purple");
-						$("#player-2").attr("style", "border: 5px solid black");
+						$("#playerone").attr("style", "border: 2px solid purple");
+						$("#playertwo").attr("style", "border: 2px solid black");
 						hidden();
 						$("#player1choices").attr("style", "visibility:visible");
 							$("#rock1").html("ROCK");
@@ -249,9 +275,9 @@ $(document).ready(function(){
 						$("#turnplayer").html("It's your turn!");
 				}
 	
-				if((player == snapshot.child("players").child(1).val().name) && (databaseTurn == 2)){//after player 1 picks
-						$("#player-1").attr("style", "border: 2px solid black");
-						$("#player-2").attr("style", "border: 2px solid purple");
+				if((player == snapshot.child("players").child(1).val().name) && (databaseTurn == 2)){
+						$("#playerone").attr("style", "border: 2px solid black");
+						$("#playertwo").attr("style", "border: 2px solid purple");
 						hidden();
 						$("#group1message").attr("style", "visibility:visible");
 							$("#group1message").html("Chose: " + "<h2>" + player1choice + "</h2>");
@@ -261,16 +287,16 @@ $(document).ready(function(){
 			
 				if((player == snapshot.child("players").child(2).val().name) && (databaseTurn == 1 )){
 						$("#welcomemessage").html("<h2>Hello " + snapshot.child("players").child(2).val().name +  ".  You are player 2!</h2>");
-						$("#player-1").attr("style", "border: 5px solid purple");
-						$("#player-2").attr("style", "border: 5px solid black");
+						$("#playerone").attr("style", "border: 2px solid purple");
+						$("#playertwo").attr("style", "border: 2px solid black");
 						$("#turnplayer").html("Wating for " + player1name + " to choose!!");
 						hidden();	
 						$("#winner").empty();
 				}
 	
 				if((player == snapshot.child("players").child(2).val().name) && (databaseTurn == 2 )){
-						$("#player-1").attr("style", "border: 2px solid black");
-						$("#player-2").attr("style", "border: 1px solid purple");
+						$("#playerone").attr("style", "border: 2px solid black");
+						$("#playertwo").attr("style", "border: 1px solid purple");
 						$("#turnplayer").html("It is your turn!"); 
 						hidden();							
 						$("#player2choices").attr("style", "visibility:visible");
@@ -287,8 +313,8 @@ $(document).ready(function(){
 						player1losses = snapshot.child("players").child(1).val().lose;
 						player2wins = snapshot.child("players").child(2).val().win;
 						player2losses = snapshot.child("players").child(2).val().lose;
-							$("#player-1").attr("style", "border: 5px solid black");
-							$("#player-2").attr("style", "border: 5px solid black");
+							$("#playerone").attr("style", "border: 2px solid black");
+							$("#playertwo").attr("style", "border: 2px solid black");
 							$("#player2choices").attr("style", "visibility:hidden");
 							$("#player1choices").attr("style", "visibility:hidden");
 							$("#group2message").attr("style", "visibility:visible");
@@ -349,7 +375,7 @@ $(document).ready(function(){
 			player2choice = $(this).val();
 				database.ref().once('value').then(function(snapshot) {
 		 			turns = (snapshot.child("turn").exists() ? snapshot.child("turn").val() : turns);
-					turns++; //3
+					turns++;
 			 		if((player == snapshot.child("players").child(2).val().name)){
 						database.ref("players/2").update({									
 							choice : player2choice,														

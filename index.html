@@ -2,7 +2,8 @@
 <html>
 <head>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
@@ -14,11 +15,19 @@
 	<title>Rock Paper Scissors Multiplayer</title>
 </head>
 <body>
+
+<!-- Theme Music Div -->
+	
+	<div id="thememusic">
+        <button class="btn btn-warning btn theme-button"><span class="glyphicon glyphicon-music"></span> Play Theme!</button>
+        <button class="btn btn-default btn pause-button"><span class="glyphicon glyphicon-pause"></span> Pause Song</button>
+      </div>
+
 	<div class="container">
 		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-7" >
-				<!-- User name input -->
+			<div class="col-lg-2"></div>
+			<div class="col-lg-7" >
+
 				<h1 id="RPS">Rock Paper Scissors Remote</h1>
 				<br><br><br>		
 				<div id="welcomemessage"></div>
@@ -35,7 +44,7 @@
 
 		<div class="row">
 			
-			<div class="col-lg-4" id="player-1">
+			<div class="col-lg-4" id="playerone">
 				
 					<p id="player1-name"></p>
 
@@ -67,7 +76,7 @@
 
 			<div class="col-lg-0.5"></div>
 
-			<div class="col-lg-4" id="player-2">
+			<div class="col-lg-4" id="playertwo">
 
 
 						<p id="player2-name"></p>
