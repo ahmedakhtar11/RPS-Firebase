@@ -101,7 +101,7 @@ database.ref("players/2").update({
 },
 
 winner1notice : function (){
-$("#winner").html( player1name + " wins!!");
+$("#winner").html(player1name + " wins!!");
 },
 
 winner2notice : function (){
@@ -309,7 +309,7 @@ $("#player1message").html("Chose: " + "<h3>" + player1choice + "</h3>");
 $("#player2message").html("Chose: " + "<h3>" + player2choice + "</h3>");
 $("#turnplayer").empty();	
 derivewinner.playerscore();
-timedelay = setTimeout(derivewinner.clearDelay, 5 * 1000);				
+timedelay = setTimeout(derivewinner.clearDelay, 4 * 1000);				
 }	
 }
 }); 

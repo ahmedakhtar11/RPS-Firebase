@@ -45,6 +45,13 @@
 	margin-right: 40px;
 }
 
+#score {
+
+	color: purple;
+	font-weight: bolder;
+	font-size: 32px;
+}
+
 input {
 	height: 40px;
 	border: 2px solid black;
