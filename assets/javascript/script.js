@@ -63,10 +63,17 @@
 
   //Var to player 2's losses
   var player2losses = 0;
+
   var turns = 1;
+
+  //Var for Time out
   var timedelay;
-  var timedelay2;
+
+  //Var for Resetting Game
   var resetgame = false;
+
+
+  
 
 $(document).ready(function(){
 
@@ -110,6 +117,8 @@ $("#winner").html( plpayer2name + " wins!!");
 
 playerscore : function (){
 
+
+// Scenario 1 Player 1 Picks Scissors and Player 2 picks Paper.
 if(player1choice == "scissors" && player2choice == "paper") {         
   player1wins++;
   player2losses++;
@@ -117,6 +126,7 @@ if(player1choice == "scissors" && player2choice == "paper") {
   derivewinner.winner1notice();
 }
 
+// Scenario 2 Player 1 Picks Paper and Player 2 picks Rock.
 if(player1choice == "paper" && player2choice == "rock") {         
   player1wins++;
   player2losses++;
