@@ -1,0 +1,122 @@
+body{
+	text-align: center;
+	background-image: url(../images/background.jpg);
+	padding: 100px 0 100px 0;
+	color: black;
+}
+
+button{
+	width: 100px;
+	color: black;
+
+}
+#name-input{
+	width: 50%;
+	color: black;
+}
+#submit-name{
+	width: 100px;
+	color: black;
+}
+
+
+#chat-window{
+	border: 5px solid black;
+	height: 450px;
+	overflow: scroll;
+	scroll-behavior: auto;
+	text-align: left;
+	padding-left: 20px;
+	background-color: lightblue;
+	color: black;
+	font-size: 15px;
+	
+}
+#player1choices, #player2choices{
+	height: 100px;
+}
+
+#group1message, #group2message{
+	height: 100px;
+	padding-bottom: 100px;
+	padding-top: 0;
+}
+#waiting1, #waiting2{
+	padding-top: 80px;
+	font-size: 20px;
+}
+
+#player1-name, #player2-name{
+
+	padding-top: 20px;
+	font-size: 15px;
+	font-weight: bold;
+
+
+}
+#score1, #score2{
+	font-weight: bold;
+	font-size: 15px;
+}
+
+#winner{
+	font-size: 30px;
+	padding-top: 200px;
+}
+#playerturn{
+	font-size: 30px;
+	font-weight: bold;
+	color: purple;
+
+}
+
+
+#RPS{
+	border: 5px solid black;
+	background-color: lightblue;
+	padding: 30px;
+}
+
+#greetings{
+
+	border: 5px solid black;
+	background-color: lightblue;
+	padding: 20px;
+}
+
+
+#chat-input{
+	width: 100%;
+	color: black;
+}
+
+#submit-chat{
+	width: 100px;
+	height: 50px;
+	color: black;
+
+}
+
+#player-1, #player-2, #score {
+	
+	height: 450px;
+	border: 5px solid black;
+}
+#player-1{
+	background-color: lightblue;
+
+}
+#player-2{
+	background-color: lightblue;
+
+}
+#score{
+	background-color: lightblue;
+	margin-left: 30px;
+	margin-right: 30px;
+
+}
+
+
+
+
