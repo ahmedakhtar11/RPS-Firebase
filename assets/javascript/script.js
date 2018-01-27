@@ -163,8 +163,8 @@ if(player1choice == player2choice) {
 $("#welcomemessage").html("<h3>Enter Your Name to Start</h3>"
 +"</br><input type='text' id='name-input'>" +
 "</br></br><input type='submit' id='submitname'>");
-$("#waiting1").html("Waiting for Player 1...");
-$("#waiting2").html("Waiting for Player 2...");
+$("#player1controls").html("Waiting for Player 1...");
+$("#player2controls").html("Waiting for Player 2...");
 
 
 function hidden() {
@@ -197,7 +197,7 @@ database.ref("/turn").onDisconnect().remove();
 }
 
 if(((snapshot.child("players").child(1).exists()) == false)){
-$("#waiting1").html("Waiting for player 1");
+$("#player1controls").html("Waiting for player 1...");
 $("#winner").empty();
 $("#player1wincount").empty();
 $("#player1lossescount").empty();
@@ -207,7 +207,7 @@ $("#turnplayer").empty();
 };
 
 if(((snapshot.child("players").child(2).exists()) == false)){
-$("#waiting2").html("Waiting for player 2");
+$("#player2controls").html("Waiting for player 2...");
 $("#winner").empty();
 $("#player2wincount").empty();
 $("#player2lossescount").empty();
@@ -217,14 +217,14 @@ $("#turnplayer").empty();
 
 if((snapshot.child("players").child(2).exists()) && ((snapshot.child("players").child(1).exists()) === false)){
 $("#player2-name").html(snapshot.child("players").child(2).val().name);
-$("#waiting2").empty();
+$("#player2controls").empty();
 hidden();
 
 disconnectplayer();
 };
 
 if((snapshot.child("players").child(1).exists()) && ((snapshot.child("players").child(2).exists()) === false)){
-$("#waiting1").empty(); 
+$("#player1controls").empty(); 
 $("#player1-name").html(snapshot.child("players").child(1).val().name);
 hidden();
 
@@ -242,8 +242,8 @@ var currentturn = snapshot.child("turn").val();
 player1name = snapshot.child("players").child(1).val().name;
 plpayer2name = snapshot.child("players").child(2).val().name;
 
-$("#waiting2").empty();
-$("#waiting1").empty();
+$("#player2controls").empty();
+$("#player1controls").empty();
 $("#player2-name").html(snapshot.child("players").child(2).val().name);
 $("#player1-name").html(snapshot.child("players").child(1).val().name);
 $("#player2wincount").html("Wins: " + snapshot.child("players").child(2).val().win);

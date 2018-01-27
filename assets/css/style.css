@@ -1,6 +1,5 @@
 #thememusic {
 
-
 	align-self: center;
 	align-content: center;
 	align-items: center;
@@ -95,7 +94,7 @@ button:hover{
 	padding-bottom: 50px;
 	padding-top: 0;
 }
-#waiting1, #waiting2{
+#player1controls, #player2controls{
 	padding-top: 40px;
 	font-size: 20px;
 }
