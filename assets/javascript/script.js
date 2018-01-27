@@ -238,7 +238,7 @@ $("#player1lossescount").html("Losses: " + player1losses);
 
 }else if((snapshot.child("players").child(1).exists()) && ((snapshot.child("players").child(2).exists()))){
 
-var databaseTurn = snapshot.child("turn").val();
+var currentturn = snapshot.child("turn").val();
 player1name = snapshot.child("players").child(1).val().name;
 plpayer2name = snapshot.child("players").child(2).val().name;
 
@@ -254,7 +254,7 @@ $("#player1lossescount").html("Losses: " + snapshot.child("players").child(1).va
 disconnectplayer();
 
 
-if((player == snapshot.child("players").child(1).val().name) && (databaseTurn == 1)){
+if((player == snapshot.child("players").child(1).val().name) && (currentturn == 1)){
 $("#welcomemessage").html("<h2>Hello " + snapshot.child("players").child(1).val().name +  ".  You are player 1!</h2>");
 hidden();
 $("#player1choices").attr("style", "visibility:visible");
@@ -265,7 +265,7 @@ $("#winner").empty();
 $("#turnplayer").html("It's your turn!");
 }
 
-if((player == snapshot.child("players").child(1).val().name) && (databaseTurn == 2)){
+if((player == snapshot.child("players").child(1).val().name) && (currentturn == 2)){
 hidden();
 $("#player1message").attr("style", "visibility:visible");
 $("#player1message").html("Chose: " + "<h2>" + player1choice + "</h2>");
@@ -273,14 +273,14 @@ $("#turnplayer").html("Waiting for " + plpayer2name + " to choose...");
 }
 
 
-if((player == snapshot.child("players").child(2).val().name) && (databaseTurn == 1 )){
+if((player == snapshot.child("players").child(2).val().name) && (currentturn == 1 )){
 $("#welcomemessage").html("<h2>Hello " + snapshot.child("players").child(2).val().name +  ".  You are player 2!</h2>");
 $("#turnplayer").html("Wating for " + player1name + " to choose!!");
 hidden();	
 $("#winner").empty();
 }
 
-if((player == snapshot.child("players").child(2).val().name) && (databaseTurn == 2 )){
+if((player == snapshot.child("players").child(2).val().name) && (currentturn == 2 )){
 $("#playerone").attr("style", "border: 2px solid black");
 $("#playertwo").attr("style", "border: 2px solid black");
 $("#turnplayer").html("It is your turn!"); 
@@ -291,7 +291,7 @@ $("#paper2").html("Choose Paper");
 $("#scissors2").html("Choose Scissors");				
 }
 
-if(databaseTurn == 3 && resetgame == false){
+if(currentturn == 3 && resetgame == false){
 resetgame = true;
 player1choice = snapshot.child("players").child(1).val().choice;
 player2choice = snapshot.child("players").child(2).val().choice;
