@@ -27,13 +27,11 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 		<div class="row">
 			<div class="col-lg-2"></div>
 			<div class="col-lg-7" >
-
-				<h1 id="RPS">Rock Paper Scissors Remote</h1>
+				<h1 id="RPS">Rock Paper Scissors-Remote</h1>
 				<br/>		
 				<div id="welcomemessage"></div>
 				<br/>
 				<div id="turnplayer"></div>
-
 			<div class="col-lg-2"></div>
 			</div>
 		</div>
@@ -41,25 +39,24 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 
 	<div class="container">
 		<br/>		
-
 		<div class="row">
-			
 			<div class="col-lg-4" id="playerone">
-					<span class= "titles"><h2>Player 1</h2></span>
+				<span class= "titles"><h2>Player 1</h2></span>
 					<p id="player1-name"></p>
 
 					<hr>
-
+<!-- Player 1 Controls -->
 					<div id ="player1controls"></div>
 
 					<div id="player1choices">
-
+<!-- Player 1 Game Buttons -->
 						<button class="choice1" id="rock1" value="rock"></button><br><br>
 						<button class="choice1" id="paper1" value="paper"></button><br><br>
 						<button class="choice1" id="scissors1" value="scissors"></button>
 					</div>
 					<div id="group1message"></div>
 				<hr>
+<!--Scoreboard Player 1-->
 				<p id="score1">
 					<span id="player1wincount"></span>
 					<span id="player1lossescount"></span>
@@ -77,11 +74,11 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 						<div class= "titles"><h2>Player 2</h2></div>
 						<p id="player2-name"></p>
 						<hr>
-					
+<!-- Player 2 Controls -->					
 						<div id ="player2controls"></div>
 
 						<div id="player2choices">
-
+<!-- Player 2 Game Buttons -->
 							<!-- RPS Buttons -->
 							<button class="choice2" id="rock2" value="rock"></button><br/>
 							<button class="choice2" id="paper2" value="paper"></button><br/>
@@ -89,42 +86,37 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 						</div>
 						<div id="group2message"></div>	
 					<hr>
+<!--Scoreboard Player 2-->					
 					<p id="score2">
 						<span id="player2wincount"></span>
 						<span id="player2lossescount"></span>
 					</p>
-		
 			</div>
-
-	
 		</div>
 	</div>
+		<div class="container">
+			<br/>		
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8">
+					<br/>			
+					<div class="row">
 
-	<div class="container">
-		<br/>		
-		<div class="row">
+						<div class= "titles"><h2>Chat Box</h2></div>
+						<div class="col-lg-12" id="chatfirebase"></div>
+					</div>
 
-			<div class="col-lg-2"></div>
-
-			<div class="col-lg-8">
-				<br/>			
-				<div class="row">
-
-					<div class= "titles"><h2>Chat Box</h2></div>
-					<div class="col-lg-12" id="chatfirebase"></div>
-				</div>
-
-				<br/>
-				<div class="row">
-					<div class="col-lg-12">
-						<form>
-						<input type="text" id="chat-input">
-						<br/><br/>
-						<input type="submit" id="chatbox" value="SEND"/>
-						</form>
+					<br/>
+					<div class="row">
+						<div class="col-lg-12">
+							<form>
+							<input type="text" id="chat-input">
+							<br/><br/>
+							<input type="submit" id="chatbox" value="SEND"/>
+							</form>
+						</div>
 					</div>
 				</div>
-			</div>
 			<div class="col-lg-2"></div>
 		</div>
 	</div>
