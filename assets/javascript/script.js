@@ -140,7 +140,7 @@ $(document).ready(function(){
 
 	
 
-	$("#greetings").html("<h2>Enter Your Name to Play</h2>"
+	$("#welcomemessage").html("<h2>Enter Your Name to Play</h2>"
 						+"</br><input type='text' id='name-input'>" +
 						"</br></br><input type='submit' id='submit-name'>");
 	$("#waiting1").html("Waiting for player 1");
@@ -190,7 +190,7 @@ $(document).ready(function(){
 				$("#win1").empty();
 				$("#lose1").empty();
 				$("#player1-name").empty();
-				$("#playerturn").empty();
+				$("#turnplayer").empty();
 				$("#player-1").attr("style", "border: 5px solid white");
 				$("#player-2").attr("style", "border: 5px solid white");
 
@@ -202,7 +202,7 @@ $(document).ready(function(){
 				$("#win2").empty();
 				$("#lose2").empty();
 				$("#player2-name").empty();
-				$("#playerturn").empty();
+				$("#turnplayer").empty();
 				$("#player-1").attr("style", "border: 5px solid white");
 				$("#player-2").attr("style", "border: 5px solid white");
 		};
@@ -225,7 +225,7 @@ $(document).ready(function(){
 				playerDisconnect();
 	
 					if(player == snapshot.child("players").child(1).val().name){
-							$("#greetings").html("<h2>Hello " + snapshot.child("players").child(1).val().name +  ".  You are player 1!</h2>");					
+							$("#welcomemessage").html("<h2>Hello " + snapshot.child("players").child(1).val().name +  ".  You are player 1!</h2>");					
 							$("#win1").html("WIN: " + player1wins);
 							$("#lose1").html("LOSE: " + player1losses);
 					}
@@ -249,7 +249,7 @@ $(document).ready(function(){
 					
 		
 				if((player == snapshot.child("players").child(1).val().name) && (databaseTurn == 1)){
-						$("#greetings").html("<h2>Hello " + snapshot.child("players").child(1).val().name +  ".  You are player 1!</h2>");
+						$("#welcomemessage").html("<h2>Hello " + snapshot.child("players").child(1).val().name +  ".  You are player 1!</h2>");
 						$("#player-1").attr("style", "border: 5px solid purple");
 						$("#player-2").attr("style", "border: 5px solid white");
 						hidden();
@@ -258,7 +258,7 @@ $(document).ready(function(){
 							$("#paper1").html("PAPER");
 							$("#scissors1").html("SCISSORS");
 						$("#winner").empty();
-						$("#playerturn").html("It's your turn!");
+						$("#turnplayer").html("It's your turn!");
 				}
 	
 				if((player == snapshot.child("players").child(1).val().name) && (databaseTurn == 2)){//after player 1 picks
@@ -267,15 +267,15 @@ $(document).ready(function(){
 						hidden();
 						$("#group1message").attr("style", "visibility:visible");
 							$("#group1message").html("Chose: " + "<h2>" + player1choice + "</h2>");
-						$("#playerturn").html("Waiting for " + plpayer2name + " to choose...");
+						$("#turnplayer").html("Waiting for " + plpayer2name + " to choose...");
 				}
 				
 			
 				if((player == snapshot.child("players").child(2).val().name) && (databaseTurn == 1 )){
-						$("#greetings").html("<h2>Hello " + snapshot.child("players").child(2).val().name +  ".  You are player 2!</h2>");
+						$("#welcomemessage").html("<h2>Hello " + snapshot.child("players").child(2).val().name +  ".  You are player 2!</h2>");
 						$("#player-1").attr("style", "border: 5px solid purple");
 						$("#player-2").attr("style", "border: 5px solid white");
-						$("#playerturn").html("Wating for " + player1name + " to choose!!");
+						$("#turnplayer").html("Wating for " + player1name + " to choose!!");
 						hidden();	
 						$("#winner").empty();
 				}
@@ -283,7 +283,7 @@ $(document).ready(function(){
 				if((player == snapshot.child("players").child(2).val().name) && (databaseTurn == 2 )){
 						$("#player-1").attr("style", "border: 2px solid white");
 						$("#player-2").attr("style", "border: 1px solid purple");
-						$("#playerturn").html("It is your turn!"); 
+						$("#turnplayer").html("It is your turn!"); 
 						hidden();							
 						$("#player2choices").attr("style", "visibility:visible");
 							$("#rock2").html("ROCK");
@@ -309,7 +309,7 @@ $(document).ready(function(){
 							$("#group1message").attr("style", "visibility:visible");		
 						 		$("#group1message").html("Chose: " + "<h2>" + player1choice + "</h2>");
 						 		$("#group2message").html("Chose: " + "<h2>" + player2choice + "</h2>");
-							$("#playerturn").empty();	
+							$("#turnplayer").empty();	
 		
 						derivewinner.playerscore();
 			
