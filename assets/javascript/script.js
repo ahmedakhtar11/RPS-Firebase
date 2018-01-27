@@ -18,6 +18,7 @@
   $("#playertwo").css('border', 'solid blue 2px');
 
   $("#chatfirebase").empty();
+  
 
  // Initialize Google Firebase
   var config = {

@@ -14,22 +14,41 @@
 	border: solid 2px purple;
 	font-size: 13px;
 	margin-bottom: 20px;
-	margin-right: 20px;
+	margin-right: 40px;
 
 }
-
 
 .theme-button {
 	color: darkgreen;
 	font-weight: bolder;
-	background-color: lawngreen;
+	background-color: #00ffcc;
+	border: solid 2px green;
+}
+
+.theme-button:hover {
+	background-color: #00cc00;
+	border: solid 2px green;
+	color: darkgreen;
 }
 
 .pause-button {
 	color: darkred;
 	font-weight: bolder;
 	background-color: #ff9999;
+	margin-right: 40px;
+}
 
+.pause-button:hover {
+	color: darkred;
+	font-weight: bolder;
+	background-color: #ff6666;
+	border: solid 2px darkred;
+	margin-right: 40px;
+}
+
+input {
+	height: 40px;
+	border: 2px solid black;
 }
 
 body{
