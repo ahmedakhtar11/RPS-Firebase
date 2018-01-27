@@ -13,8 +13,46 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
 	<title>Rock Paper Scissors Multiplayer</title>
+
+<style>
+body {
+            background: #082023;
+            height: 2000px;
+            z-index: -1;
+            color: white;
+            text-shadow: 0 0 15px black;
+        }
+        .drop {
+            background: -webkit-gradient(linear,0% 0%,0% 100%, from(rgba(13,52,58,1) ), to(rgba(255,255,255,0.6)) );
+            background: -moz-linear-gradient(top, rgba(13,52,58,1) 0%, rgba(255,255,255,.6) 100%);
+            width: 1px;
+            height: 89px;
+            position: absolute;
+            bottom: 200px;
+            -webkit-animation: fall .63s linear infinite;
+            -moz-animation: fall .63s linear infinite;
+               z-index: -1;
+        }
+
+   
+        @-webkit-keyframes fall {
+            to {
+                margin-top: 900px;
+            }
+        }
+
+        @-moz-keyframes fall {
+            to {
+                margin-top: 900px;
+            }
+        }
+
+</style>
+
+
+
 </head>
-<body>
+<body class = "rain">
 
 <!-- Theme Music Div -->
 	
@@ -121,5 +159,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 		</div>
 	</div>
 <script type="text/javascript" src="assets/javascript/script.js"></script>
+
+<script src="assets/javascript/raindrops.js"></script>
 </body>
 </html>
