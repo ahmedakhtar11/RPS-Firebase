@@ -16,8 +16,8 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-2"></div>
-			<div class="col-lg-8" >
+			<div class="col-md-2"></div>
+			<div class="col-md-7" >
 				<!-- User name input -->
 				<h1 id="RPS">Rock Paper Scissors Remote</h1>
 				<br><br><br>		
@@ -52,8 +52,8 @@
 					<div id="group1message"></div>
 				<hr>
 				<p id="score1">
-					<span id="win1"></span>
-					<span id="lose1"></span>
+					<span id="player1wincount"></span>
+					<span id="player1lossescount"></span>
 				</p>		
 
 			</div>
@@ -84,8 +84,8 @@
 						<div id="group2message"></div>	
 					<hr>
 					<p id="score2">
-						<span id="win2"></span>
-						<span id="lose2"></span>
+						<span id="player2wincount"></span>
+						<span id="player2lossescount"></span>
 					</p>
 		
 			</div>
@@ -104,7 +104,7 @@
 				<br><br><br>			
 				<div class="row">
 
-					<div class="col-lg-12" id="chat-window"></div>
+					<div class="col-lg-12" id="chatfirebase"></div>
 				</div>
 
 				<br><br>
@@ -113,7 +113,7 @@
 						<form>
 						<input type="text" id="chat-input">
 						<br/><br/>
-						<input type="submit" id="submit-chat" value="SEND"/>
+						<input type="submit" id="chatbox" value="SEND"/>
 						</form>
 					</div>
 				</div>

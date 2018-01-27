@@ -138,7 +138,7 @@ $(document).ready(function(){
 
 	$("#welcomemessage").html("<h2>Enter Your Name to Start</h2>"
 	+"</br><input type='text' id='name-input'>" +
-	"</br></br><input type='submit' id='submit-name'>");
+	"</br></br><input type='submit' id='submitname'>");
 	$("#waiting1").html("Waiting for player 1");
 	$("#waiting2").html("Waiting for player 2");
 	
@@ -175,31 +175,31 @@ $(document).ready(function(){
 		if(((snapshot.child("players").child(1).exists()) == false)){
 				$("#waiting1").html("Waiting for player 1");
 				$("#winner").empty();
-				$("#win1").empty();
-				$("#lose1").empty();
+				$("#player1win").empty();
+				$("#player1lossescount").empty();
 				$("#player1-name").empty();
 				$("#turnplayer").empty();
-				$("#player-1").attr("style", "border: 5px solid white");
-				$("#player-2").attr("style", "border: 5px solid white");
+				$("#player-1").attr("style", "border: 5px solid black");
+				$("#player-2").attr("style", "border: 5px solid black");
 
 		};
 
 		if(((snapshot.child("players").child(2).exists()) == false)){
 				$("#waiting2").html("Waiting for player 2");
 				$("#winner").empty();
-				$("#win2").empty();
-				$("#lose2").empty();
+				$("#player2wincount").empty();
+				$("#player2lossescount").empty();
 				$("#player2-name").empty();
 				$("#turnplayer").empty();
-				$("#player-1").attr("style", "border: 5px solid white");
-				$("#player-2").attr("style", "border: 5px solid white");
+				$("#player-1").attr("style", "border: 5px solid black");
+				$("#player-2").attr("style", "border: 5px solid black");
 		};
 
 		if((snapshot.child("players").child(2).exists()) && ((snapshot.child("players").child(1).exists()) === false)){
 				$("#player2-name").html(snapshot.child("players").child(2).val().name);
 				$("#waiting2").empty();
-				$("#player-1").attr("style", "border: 5px solid white");
-				$("#player-2").attr("style", "border: 5px solid white");
+				$("#player-1").attr("style", "border: 5px solid black");
+				$("#player-2").attr("style", "border: 5px solid black");
 				hidden();
 	
 				playerDisconnect();
@@ -214,8 +214,8 @@ $(document).ready(function(){
 	
 					if(player == snapshot.child("players").child(1).val().name){
 							$("#welcomemessage").html("<h2>Hello " + snapshot.child("players").child(1).val().name +  ".  You are player 1!</h2>");					
-							$("#win1").html("WIN: " + player1wins);
-							$("#lose1").html("LOSE: " + player1losses);
+							$("#player1win").html("WIN: " + player1wins);
+							$("#player1lossescount").html("LOSE: " + player1losses);
 					}
 
 		}else if((snapshot.child("players").child(1).exists()) && ((snapshot.child("players").child(2).exists()))){
@@ -228,10 +228,10 @@ $(document).ready(function(){
 					$("#waiting1").empty();
 					$("#player2-name").html(snapshot.child("players").child(2).val().name);
 					$("#player1-name").html(snapshot.child("players").child(1).val().name);
-					$("#win2").html("WIN: " + snapshot.child("players").child(2).val().win);
-					$("#lose2").html("LOSE: " + snapshot.child("players").child(2).val().lose);
-					$("#win1").html("WIN: " + snapshot.child("players").child(1).val().win);
-					$("#lose1").html("LOSE: " + snapshot.child("players").child(1).val().lose);
+					$("#player2wincount").html("WIN: " + snapshot.child("players").child(2).val().win);
+					$("#player2lossescount").html("LOSE: " + snapshot.child("players").child(2).val().lose);
+					$("#player1win").html("WIN: " + snapshot.child("players").child(1).val().win);
+					$("#player1lossescount").html("LOSE: " + snapshot.child("players").child(1).val().lose);
 	
 					playerDisconnect();
 					
@@ -239,7 +239,7 @@ $(document).ready(function(){
 				if((player == snapshot.child("players").child(1).val().name) && (databaseTurn == 1)){
 						$("#welcomemessage").html("<h2>Hello " + snapshot.child("players").child(1).val().name +  ".  You are player 1!</h2>");
 						$("#player-1").attr("style", "border: 5px solid purple");
-						$("#player-2").attr("style", "border: 5px solid white");
+						$("#player-2").attr("style", "border: 5px solid black");
 						hidden();
 						$("#player1choices").attr("style", "visibility:visible");
 							$("#rock1").html("ROCK");
@@ -250,7 +250,7 @@ $(document).ready(function(){
 				}
 	
 				if((player == snapshot.child("players").child(1).val().name) && (databaseTurn == 2)){//after player 1 picks
-						$("#player-1").attr("style", "border: 2px solid white");
+						$("#player-1").attr("style", "border: 2px solid black");
 						$("#player-2").attr("style", "border: 2px solid purple");
 						hidden();
 						$("#group1message").attr("style", "visibility:visible");
@@ -262,14 +262,14 @@ $(document).ready(function(){
 				if((player == snapshot.child("players").child(2).val().name) && (databaseTurn == 1 )){
 						$("#welcomemessage").html("<h2>Hello " + snapshot.child("players").child(2).val().name +  ".  You are player 2!</h2>");
 						$("#player-1").attr("style", "border: 5px solid purple");
-						$("#player-2").attr("style", "border: 5px solid white");
+						$("#player-2").attr("style", "border: 5px solid black");
 						$("#turnplayer").html("Wating for " + player1name + " to choose!!");
 						hidden();	
 						$("#winner").empty();
 				}
 	
 				if((player == snapshot.child("players").child(2).val().name) && (databaseTurn == 2 )){
-						$("#player-1").attr("style", "border: 2px solid white");
+						$("#player-1").attr("style", "border: 2px solid black");
 						$("#player-2").attr("style", "border: 1px solid purple");
 						$("#turnplayer").html("It is your turn!"); 
 						hidden();							
@@ -287,8 +287,8 @@ $(document).ready(function(){
 						player1losses = snapshot.child("players").child(1).val().lose;
 						player2wins = snapshot.child("players").child(2).val().win;
 						player2losses = snapshot.child("players").child(2).val().lose;
-							$("#player-1").attr("style", "border: 5px solid white");
-							$("#player-2").attr("style", "border: 5px solid white");
+							$("#player-1").attr("style", "border: 5px solid black");
+							$("#player-2").attr("style", "border: 5px solid black");
 							$("#player2choices").attr("style", "visibility:hidden");
 							$("#player1choices").attr("style", "visibility:hidden");
 							$("#group2message").attr("style", "visibility:visible");
@@ -302,7 +302,7 @@ $(document).ready(function(){
 		}
 	}); 
 
-	$("#submit-name").on("click", function(){	
+	$("#submitname").on("click", function(){	
 		var username = $("#name-input").val().trim();
 		player = username;
 		    database.ref().once('value').then(function(snapshot) {
@@ -361,7 +361,7 @@ $(document).ready(function(){
 				});
 			}); 
  	
- 				$("#submit-chat").on("click", function(event){
+ 				$("#chatbox").on("click", function(event){
  				event.preventDefault();
 				var messages = $("#chat-input").val().trim();
 				$("#chat-input").val("");
@@ -373,7 +373,7 @@ $(document).ready(function(){
 		}); 
 
 				database.ref("/chat").orderByChild("dateAdded").limitToLast(1).on("value", function(snapshot) {
-	    		$("#chat-window").append("</br>" + snapshot.val().message + "</br>");
+	    		$("#chatfirebase").append("</br>" + snapshot.val().message + "</br>");
 			});
 
 		});
