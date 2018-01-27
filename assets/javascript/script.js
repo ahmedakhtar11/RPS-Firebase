@@ -50,31 +50,31 @@
 
 $(document).ready(function(){
 
-	//this object handles the score check
+	//Checking the Score
 	var derivewinner={
-			//restart the game to turn 1
+			//Reset Game
 			resetGame : function(){
 				resetgame = false;
 				turns = 1;
-					//update the turn in the firebase to 1
+				//Update Turns
 					database.ref().update({
 								turn: turns
 					});
 			},
-			//clear the 5 seconds timeout and call the reset
+			//Clear Timeout and then Reset
 			clearDelay : function(){
 				clearTimeout(timedelay);
 				derivewinner.resetGame();
 			},
-			//update winner message to winner 1 
-			updateWinner1 : function (){
+		
+			winner1notice : function (){
 				$("#winner").html( player1name + " wins!!");
 			},
-			//update winner message to winner 1 
-			updateWinner2 : function (){
+	
+			winner2notice : function (){
 				$("#winner").html( plpayer2name + " wins!!");
 			},
-			//update the database to match the player score after the increases
+	
 			updateScore: function(){
 				database.ref("players/1").update({		
 						win: player1wins,
@@ -92,42 +92,42 @@ $(document).ready(function(){
 				if(player1choice == "rock" && player2choice == "scissors") {	
 					player1wins++;
 					player2losses++;
-					derivewinner.updateWinner1();
+					derivewinner.winner1notice();
 					derivewinner.updateScore();
 				}
 		
 				if(player1choice == "rock" && player2choice == "paper") {
 					player1losses++;
 					player2wins++;
-					derivewinner.updateWinner2();
+					derivewinner.winner2notice();
 					derivewinner.updateScore();					
 				}
 		
 				if(player1choice == "scissors" && player2choice == "rock") {					
 					player1losses++;
 					player2wins++;
-					derivewinner.updateWinner2();
+					derivewinner.winner2notice();
 					derivewinner.updateScore();		
 				}
 		
 				if(player1choice == "scissors" && player2choice == "paper") {					
 					player1wins++;
 					player2losses++;
-					derivewinner.updateWinner1();
+					derivewinner.winner1notice();
 					derivewinner.updateScore();
 				}
 		
 				if(player1choice == "paper" && player2choice == "rock") {					
 					player1wins++;
 					player2losses++;
-					derivewinner.updateWinner1();
+					derivewinner.winner1notice();
 					derivewinner.updateScore();				
 				}
 				
 				if(player1choice == "paper" && player2choice == "scissors") {
 					player1losses++;
 					player2wins++;
-					derivewinner.updateWinner2();
+					derivewinner.winner2notice();
 					derivewinner.updateScore();
 				}
 	
@@ -184,7 +184,6 @@ $(document).ready(function(){
 			}
 		}
 		
-		//if player 1 dont exists, empty all that related to player 1 and unhilighted both user div
 		if(((snapshot.child("players").child(1).exists()) == false)){
 				$("#waiting1").html("Waiting for player 1");
 				$("#winner").empty();
@@ -196,7 +195,7 @@ $(document).ready(function(){
 				$("#player-2").attr("style", "border: 5px solid white");
 
 		};
-		//if player 2 dont exists, empty all that related to player 2 and unhilighted both user div
+
 		if(((snapshot.child("players").child(2).exists()) == false)){
 				$("#waiting2").html("Waiting for player 2");
 				$("#winner").empty();
@@ -207,36 +206,36 @@ $(document).ready(function(){
 				$("#player-1").attr("style", "border: 5px solid white");
 				$("#player-2").attr("style", "border: 5px solid white");
 		};
-		//if player 2 exists but not 1,, show player 2 name in his div and unhilighted both user div
+
 		if((snapshot.child("players").child(2).exists()) && ((snapshot.child("players").child(1).exists()) === false)){
 				$("#player2-name").html(snapshot.child("players").child(2).val().name);
 				$("#waiting2").empty();
 				$("#player-1").attr("style", "border: 5px solid white");
 				$("#player-2").attr("style", "border: 5px solid white");
 				hidden();
-				//when any player disconnect from the game
+	
 				playerDisconnect();
 		};
-		//if player 1 exists but not 2,,show player 1 name in his div and unhilighted both user div
+
 		if((snapshot.child("players").child(1).exists()) && ((snapshot.child("players").child(2).exists()) === false)){
 				$("#waiting1").empty(); 
 				$("#player1-name").html(snapshot.child("players").child(1).val().name);
 				hidden();
-				//when any player disconnect from the game
+		
 				playerDisconnect();
-					//at the player1's  browser
+	
 					if(player == snapshot.child("players").child(1).val().name){
 							$("#greetings").html("<h2>Hello " + snapshot.child("players").child(1).val().name +  ".  You are player 1!</h2>");					
 							$("#win1").html("WIN: " + player1wins);
 							$("#lose1").html("LOSE: " + player1losses);
 					}
-		//If both players exists == we are READY to play!
+
 		}else if((snapshot.child("players").child(1).exists()) && ((snapshot.child("players").child(2).exists()))){
-				//Keeping track of turn for the database
+	
 				var databaseTurn = snapshot.child("turn").val();
 				player1name = snapshot.child("players").child(1).val().name;
 	  			plpayer2name = snapshot.child("players").child(2).val().name;
-					//Both browers will show...
+
 					$("#waiting2").empty();
 					$("#waiting1").empty();
 					$("#player2-name").html(snapshot.child("players").child(2).val().name);
@@ -245,10 +244,10 @@ $(document).ready(function(){
 					$("#lose2").html("LOSE: " + snapshot.child("players").child(2).val().lose);
 					$("#win1").html("WIN: " + snapshot.child("players").child(1).val().win);
 					$("#lose1").html("LOSE: " + snapshot.child("players").child(1).val().lose);
-					//when any player disconnect from the game
+	
 					playerDisconnect();
 					
-				//player 1's browser, player 1's turn
+		
 				if((player == snapshot.child("players").child(1).val().name) && (databaseTurn == 1)){
 						$("#greetings").html("<h2>Hello " + snapshot.child("players").child(1).val().name +  ".  You are player 1!</h2>");
 						$("#player-1").attr("style", "border: 5px solid purple");
@@ -261,7 +260,7 @@ $(document).ready(function(){
 						$("#winner").empty();
 						$("#playerturn").html("It's your turn!");
 				}
-				//player 1's browser, player 2's turn
+	
 				if((player == snapshot.child("players").child(1).val().name) && (databaseTurn == 2)){//after player 1 picks
 						$("#player-1").attr("style", "border: 2px solid white");
 						$("#player-2").attr("style", "border: 2px solid purple");
@@ -271,7 +270,7 @@ $(document).ready(function(){
 						$("#playerturn").html("Waiting for " + plpayer2name + " to choose...");
 				}
 				
-				//player2's browser, player 1's turn
+			
 				if((player == snapshot.child("players").child(2).val().name) && (databaseTurn == 1 )){
 						$("#greetings").html("<h2>Hello " + snapshot.child("players").child(2).val().name +  ".  You are player 2!</h2>");
 						$("#player-1").attr("style", "border: 5px solid purple");
@@ -280,7 +279,7 @@ $(document).ready(function(){
 						hidden();	
 						$("#winner").empty();
 				}
-				//player2's browser, player 2's turn
+	
 				if((player == snapshot.child("players").child(2).val().name) && (databaseTurn == 2 )){
 						$("#player-1").attr("style", "border: 2px solid white");
 						$("#player-2").attr("style", "border: 1px solid purple");
