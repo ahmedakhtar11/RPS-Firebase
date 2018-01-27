@@ -1,12 +1,8 @@
- 
+  //Note: Heavy Jquery use of HTML Divs to hide and display features.
 
   // Audio for Theme Song
   var audioElement = document.createElement("audio");
   audioElement.setAttribute("src", "assets/avemaria.mp3");
-
-  // Sound Effects for Crystal Buttons
-  var audioElement2 = document.createElement("audio");
-  audioElement2.setAttribute("src", "assets/lasersoundeffect.mp3");
 
   // Theme Music Play Button
   $(".theme-button").on("click", function() {
@@ -18,10 +14,10 @@
     audioElement.pause();
   });
 
-      // Crystal Buttons Sound Effect
-  $("#buttonscrystals").on("click", function() {
-   audioElement2.play();
-  });
+  $("#playerone").css('border', 'solid blue 2px');
+  $("#playertwo").css('border', 'solid blue 2px');
+
+  $("#chatfirebase").empty();
 
  // Initialize Google Firebase
   var config = {
@@ -33,7 +29,6 @@
     messagingSenderId: "244628581855"
   };
   firebase.initializeApp(config);
-
 
   //Var to reference Firebase Database
   var database = firebase.database();
@@ -74,8 +69,8 @@
 
 $(document).ready(function(){
 
-	//Checking the Score
-	var derivewinner={
+//Checking the Score
+var derivewinner={
 
 //Reset Game
 resetGame : function(){
@@ -86,18 +81,11 @@ turns = 1;
 				turn: turns
 	});
 },
+
 //Clear Timeout and then Reset
 clearDelay : function(){
 clearTimeout(timedelay);
 derivewinner.resetGame();
-},
-
-winner1notice : function (){
-$("#winner").html( player1name + " wins!!");
-},
-
-winner2notice : function (){
-$("#winner").html( plpayer2name + " wins!!");
 },
 
 updateScore: function(){
@@ -111,69 +99,78 @@ database.ref("players/2").update({
 });
 },
 
+winner1notice : function (){
+$("#winner").html( player1name + " wins!!");
+},
+
+winner2notice : function (){
+$("#winner").html( plpayer2name + " wins!!");
+},
+
 playerscore : function (){
+
+if(player1choice == "scissors" && player2choice == "paper") {         
+  player1wins++;
+  player2losses++;
+  derivewinner.updateScore();
+  derivewinner.winner1notice();
+}
+
+if(player1choice == "paper" && player2choice == "rock") {         
+  player1wins++;
+  player2losses++;
+  derivewinner.updateScore();   
+  derivewinner.winner1notice();
+}
+
+if(player1choice == "paper" && player2choice == "scissors") {
+  player1losses++;
+  player2wins++;
+  derivewinner.updateScore();
+  derivewinner.winner2notice();
+}
 
 if(player1choice == "rock" && player2choice == "scissors") {	
 	player1wins++;
 	player2losses++;
+  derivewinner.updateScore();
 	derivewinner.winner1notice();
-	derivewinner.updateScore();
 }
 
 if(player1choice == "rock" && player2choice == "paper") {
 	player1losses++;
 	player2wins++;
-	derivewinner.winner2notice();
-	derivewinner.updateScore();					
+  derivewinner.updateScore();   
+	derivewinner.winner2notice();	
 }
 
 if(player1choice == "scissors" && player2choice == "rock") {					
 	player1losses++;
 	player2wins++;
+  derivewinner.updateScore();   
 	derivewinner.winner2notice();
-	derivewinner.updateScore();		
+
 }
 
-if(player1choice == "scissors" && player2choice == "paper") {					
-	player1wins++;
-	player2losses++;
-	derivewinner.winner1notice();
-	derivewinner.updateScore();
-}
-
-if(player1choice == "paper" && player2choice == "rock") {					
-	player1wins++;
-	player2losses++;
-	derivewinner.winner1notice();
-	derivewinner.updateScore();				
-}
-
-if(player1choice == "paper" && player2choice == "scissors") {
-	player1losses++;
-	player2wins++;
-	derivewinner.winner2notice();
-	derivewinner.updateScore();
-}
 
 if(player1choice == player2choice) {
 	$("#winner").html("It's a tie!");
 }
-
 }
 }
 
-$("#welcomemessage").html("<h2>Enter Your Name to Start</h2>"
+$("#welcomemessage").html("<h3>Enter Your Name to Start</h3>"
 +"</br><input type='text' id='name-input'>" +
 "</br></br><input type='submit' id='submitname'>");
-$("#waiting1").html("Waiting for player 1");
-$("#waiting2").html("Waiting for player 2");
+$("#waiting1").html("Waiting for Player 1...");
+$("#waiting2").html("Waiting for Player 2...");
 
 
 function hidden() {
+$("#player2message").attr("style", "visibility:hidden");
+$("#player1message").attr("style", "visibility:hidden");
 $("#player1choices").attr("style", "visibility:hidden");
 $("#player2choices").attr("style", "visibility:hidden");
-$("#group2message").attr("style", "visibility:hidden");
-$("#group1message").attr("style", "visibility:hidden");
 }
 hidden();
 database.ref().on("value", function(snapshot){
@@ -234,8 +231,8 @@ disconnectplayer();
 
 if(player == snapshot.child("players").child(1).val().name){
 $("#welcomemessage").html("<h2>Hello " + snapshot.child("players").child(1).val().name +  ".  You are player 1!</h2>");					
-$("#player1wincount").html("WIN: " + player1wins);
-$("#player1lossescount").html("LOSE: " + player1losses);
+$("#player1wincount").html("Wins: " + player1wins);
+$("#player1lossescount").html("Losses: " + player1losses);
 }
 
 }else if((snapshot.child("players").child(1).exists()) && ((snapshot.child("players").child(2).exists()))){
@@ -248,10 +245,10 @@ $("#waiting2").empty();
 $("#waiting1").empty();
 $("#player2-name").html(snapshot.child("players").child(2).val().name);
 $("#player1-name").html(snapshot.child("players").child(1).val().name);
-$("#player2wincount").html("WIN: " + snapshot.child("players").child(2).val().win);
-$("#player2lossescount").html("LOSE: " + snapshot.child("players").child(2).val().lose);
-$("#player1wincount").html("WIN: " + snapshot.child("players").child(1).val().win);
-$("#player1lossescount").html("LOSE: " + snapshot.child("players").child(1).val().lose);
+$("#player2wincount").html("Wins: " + snapshot.child("players").child(2).val().win);
+$("#player2lossescount").html("Losses: " + snapshot.child("players").child(2).val().lose);
+$("#player1wincount").html("Wins: " + snapshot.child("players").child(1).val().win);
+$("#player1lossescount").html("Losses: " + snapshot.child("players").child(1).val().lose);
 
 disconnectplayer();
 
@@ -260,17 +257,17 @@ if((player == snapshot.child("players").child(1).val().name) && (databaseTurn ==
 $("#welcomemessage").html("<h2>Hello " + snapshot.child("players").child(1).val().name +  ".  You are player 1!</h2>");
 hidden();
 $("#player1choices").attr("style", "visibility:visible");
-$("#rock1").html("ROCK");
-$("#paper1").html("PAPER");
-$("#scissors1").html("SCISSORS");
+$("#rock1").html("Choose Rock");
+$("#paper1").html("Choose Paper");
+$("#scissors1").html("Choose Scissors");
 $("#winner").empty();
 $("#turnplayer").html("It's your turn!");
 }
 
 if((player == snapshot.child("players").child(1).val().name) && (databaseTurn == 2)){
 hidden();
-$("#group1message").attr("style", "visibility:visible");
-$("#group1message").html("Chose: " + "<h2>" + player1choice + "</h2>");
+$("#player1message").attr("style", "visibility:visible");
+$("#player1message").html("Chose: " + "<h2>" + player1choice + "</h2>");
 $("#turnplayer").html("Waiting for " + plpayer2name + " to choose...");
 }
 
@@ -284,13 +281,13 @@ $("#winner").empty();
 
 if((player == snapshot.child("players").child(2).val().name) && (databaseTurn == 2 )){
 $("#playerone").attr("style", "border: 2px solid black");
-$("#playertwo").attr("style", "border: 1px solid purple");
+$("#playertwo").attr("style", "border: 2px solid black");
 $("#turnplayer").html("It is your turn!"); 
 hidden();							
 $("#player2choices").attr("style", "visibility:visible");
-$("#rock2").html("ROCK");
-$("#paper2").html("PAPER");
-$("#scissors2").html("SCISSORS");				
+$("#rock2").html("Choose Rock");
+$("#paper2").html("Choose Paper");
+$("#scissors2").html("Choose Scissors");				
 }
 
 if(databaseTurn == 3 && resetgame == false){
@@ -305,10 +302,10 @@ $("#playerone").attr("style", "border: 2px solid black");
 $("#playertwo").attr("style", "border: 2px solid black");
 $("#player2choices").attr("style", "visibility:hidden");
 $("#player1choices").attr("style", "visibility:hidden");
-$("#group2message").attr("style", "visibility:visible");
-$("#group1message").attr("style", "visibility:visible");		
-	$("#group1message").html("Chose: " + "<h2>" + player1choice + "</h2>");
-	$("#group2message").html("Chose: " + "<h2>" + player2choice + "</h2>");
+$("#player2message").attr("style", "visibility:visible");
+$("#player1message").attr("style", "visibility:visible");		
+$("#player1message").html("Chose: " + "<h3>" + player1choice + "</h3>");
+$("#player2message").html("Chose: " + "<h3>" + player2choice + "</h3>");
 $("#turnplayer").empty();	
 derivewinner.playerscore();
 timedelay = setTimeout(derivewinner.clearDelay, 5 * 1000);				
@@ -336,7 +333,7 @@ database.ref().update({
 turn: turns,
 });
 }else if ((snapshot.child("players").child(1).exists()) && (snapshot.child("players").child(2).exists())){
-alert("There is a game in progress. Please Try again.");
+alert("There is currently a game in progress. Please Try again.");
 }
 }); 
 }); 
@@ -374,20 +371,22 @@ database.ref().update({
 }
 });
 }); 
- 	
-$("#chatbox").on("click", function(event){
-event.preventDefault();
-var messages = $("#chat-input").val().trim();
-$("#chat-input").val("");
-alertwindow = player + " : " + messages;
-database.ref("/chat").update({		
-message: alertwindow,
-dateAdded: firebase.database.ServerValue.TIMESTAMP								
-});
+
+//Adding the Chatbox
+
+    $("#chatbox").on("click", function(event){
+    event.preventDefault();
+    var messages = $("#chat-input").val().trim();
+    $("#chat-input").val("");
+    alertwindow = player + " : " + messages;
+    database.ref("/chat").update({		
+    message: alertwindow,
+    dateAdded: firebase.database.ServerValue.TIMESTAMP								
+  });
 }); 
 
-database.ref("/chat").orderByChild("dateAdded").limitToLast(1).on("value", function(snapshot) {
-$("#chatfirebase").append("</br>" + snapshot.val().message + "</br>");
-});
+    database.ref("/chat").orderByChild("dateAdded").limitToLast(1).on("value", function(snapshot) {
+    $("#chatfirebase").append("</br>" + snapshot.val().message + "</br>");
+    });
 
 });

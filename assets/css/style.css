@@ -32,7 +32,6 @@
 
 }
 
-
 body{
 	text-align: center;
 	background-color: #e6fff2;
@@ -42,7 +41,16 @@ body{
 
 button{
 	width: 100px;
-	color: black;
+	color: purple;
+	border: solid purple 1px;
+
+}
+
+button:hover{
+	width: 100px;
+	color: green;
+	font-weight: bolder;
+	border: solid green 2px;
 
 }
 
