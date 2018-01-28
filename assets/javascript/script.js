@@ -2,7 +2,7 @@
 
   // Audio for Theme Song
   var audioElement = document.createElement("audio");
-  audioElement.setAttribute("src", "assets/avemaria.mp3");
+  audioElement.setAttribute("src", "assets/didothankyou.mp3");
 
   // Theme Music Play Button
   $(".theme-button").on("click", function() {
