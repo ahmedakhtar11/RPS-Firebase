@@ -279,7 +279,7 @@ if((player == snapshot.child("players").child(1).val().name) && (currentturn == 
 	$("#paper1").html("Choose Paper");
 	$("#scissors1").html("Choose Scissors");
 	$("#winner").empty();
-	$("#turnplayer").html("It's your turn!");
+	$("#turnplayer").html("Choose Rock, Paper or Scissors.");
 }
 
 if((player == snapshot.child("players").child(1).val().name) && (currentturn == 2)){
@@ -292,7 +292,7 @@ if((player == snapshot.child("players").child(1).val().name) && (currentturn == 
 
 if((player == snapshot.child("players").child(2).val().name) && (currentturn == 1 )){
 	$("#welcomemessage").html("<h2>Hello " + snapshot.child("players").child(2).val().name +  ".  You are player 2!</h2>");
-	$("#turnplayer").html("Wating for " + player1name + " to choose!!");
+	$("#turnplayer").html("Wating for " + player1name + " to choose...");
 	hidden();	
 	$("#winner").empty();
 }
@@ -300,7 +300,7 @@ if((player == snapshot.child("players").child(2).val().name) && (currentturn == 
 if((player == snapshot.child("players").child(2).val().name) && (currentturn == 2 )){
 	$("#playerone").attr("style", "border: 2px solid black");
 	$("#playertwo").attr("style", "border: 2px solid black");
-	$("#turnplayer").html("It is your turn!"); 
+	$("#turnplayer").html("Choose Rock, Paper or Scissors."); 
 hidden();							
 	$("#player2choices").attr("style", "visibility:visible");
 	$("#rock2").html("Choose Rock");
